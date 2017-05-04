@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App2 from './App2';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import '../../shared/app.css';
 
-const networkInterface = createNetworkInterface({ uri: 'https://graphql.myshopify.com/api/graphql' });
+const networkInterface = createNetworkInterface({ uri: 'https://namaste-marc-sandbox.myshopify.com//api/graphql' });
 
 networkInterface.use([{
   applyMiddleware(req, next) {
     if (!req.options.headers) {
       req.options.headers = {};
     }
-    req.options.headers['X-Shopify-Storefront-Access-Token'] = 'dd4d4dc146542ba7763305d71d1b3d38'
+    req.options.headers['X-Shopify-Storefront-Access-Token'] = '0dedac588c42195a08952f737408c020'
     next();
   }
 }]);
@@ -22,7 +22,7 @@ const client = new ApolloClient({
 
 ReactDOM.render((
   <ApolloProvider client={client}>
-    <App />
+    <App2 />
   </ApolloProvider>
   ),
   document.getElementById('root')
