@@ -3,7 +3,7 @@ import Cart from './components/Cart';
 import CustomerAuthWithMutation from './components/CustomerAuth';
 import PropTypes from 'prop-types';
 import { graphql, gql, compose } from 'react-apollo'
-import ProductCard from './components/ProductCard' 
+import PageState from './components/PageState' 
 import {
   createCheckout,
   checkoutLineItemsAdd,
@@ -119,15 +119,6 @@ class App2 extends Component {
     if (this.props.data.error) {
       return <p>{this.props.data.error.message}</p>;
     }
-
-    const productCardView = product => (
-      <ProductCard 
-          addVariantToCart={this.addVariantToCart}
-          checkout={this.state.checkout} 
-          key={product.node.id.toString()} 
-          product={product.node}/> 
-        )
-
     return (
 
       <div className="App">
@@ -156,9 +147,12 @@ class App2 extends Component {
             <h2>{this.props.data.shop.description}</h2>
           </div>
         </header>
-          <div className="container col-md-offset-3 col-md-9">
-                {this.props.data.shop.products.edges.map(productCardView)}
-          </div>
+        <PageState
+          addVariantToCart={this.addVariantToCart}
+          checkout={this.state.checkout}
+          products={this.props.data.shop.products.edges}
+          totalItemsCount={this.props.data.shop.products.edges.length}
+          />
         <Cart
           removeLineItemInCart={this.removeLineItemInCart}
           updateLineItemInCart={this.updateLineItemInCart}
@@ -176,7 +170,7 @@ const query = gql`
     shop {
       name
       description
-      products(first:10) {
+      products(first:100) {
         pageInfo {
           hasNextPage
           hasPreviousPage
