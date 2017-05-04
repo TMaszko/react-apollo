@@ -34,7 +34,7 @@ class Product extends Component {
     const target = event.target
     let selectedOptions = this.state.selectedOptions;
     selectedOptions[target.name] = target.value;
-
+   
     const selectedVariant = this.props.product.variants.edges.find((variant) => {
       return variant.node.selectedOptions.every((selectedOption) => {
         return selectedOptions[selectedOption.name] === selectedOption.value;

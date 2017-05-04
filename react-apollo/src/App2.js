@@ -113,6 +113,7 @@ class App2 extends Component {
   }
 
   render() {
+
     if (this.props.data.loading) {
       return <p>Loading ...</p>;
     }
@@ -170,7 +171,7 @@ const query = gql`
     shop {
       name
       description
-      products(first:100) {
+      products(first:10) {
         pageInfo {
           hasNextPage
           hasPreviousPage
@@ -181,6 +182,7 @@ const query = gql`
             id
             title
             tags
+            productType
             options {
               id
               name

@@ -13,7 +13,6 @@ class ProductCard extends Component {
     super(props);
 
     this.state = {};
-
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.findImage = this.findImage.bind(this);
@@ -41,10 +40,10 @@ class ProductCard extends Component {
     const target = event.target
     let selectedOptions = this.state.selectedOptions;
     selectedOptions[target.name] = target.value;
-
     const selectedVariant = this.props.product.variants.edges.find((variant) => {
       return variant.node.selectedOptions.every((selectedOption) => {
-        return selectedOptions[selectedOption.name] === selectedOption.value;
+          console.log(variant.node.selectedOptions)
+        return selectedOptions[selectedOption.name] === selectedOption.value; 
       });
     }).node;
 
