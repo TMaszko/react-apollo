@@ -96,18 +96,12 @@ class ProductCard extends Component {
           <div className="col-md-4">
             {this.props.product.images.edges.length ? <img className="img-responsive" src={variantImage} alt={`${this.props.product.title} product shot`}/> : null}
           </div>
-          <div className="col-md-offset-2 Details__product container col-md-6">
+          <div className="Details__product col-md-6">
             <h5 className="text-left ProductCard__title">{this.props.product.title}</h5>
             <h6 className="text-left ProductCard__title">{this.props.product.vendor}</h6>
               <span className="ProductCard_price">${variant.price}</span>
-              {variant_selectors}
-              <label className="ProductCard__option">
-                Quantity
-              </label>
               <FormState onAddingCart={this.props.addVariantToCart.bind(this)} variant={variant} />
           </div>
-           <Slider images={variantImages} />
-           <div className="col-md-6">{this.props.product.description}</div>
         </div>
     );
   }

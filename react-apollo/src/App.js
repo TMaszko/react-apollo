@@ -139,7 +139,7 @@ class App extends Component {
             <h2>{this.props.data.shop.description}</h2>
           </div>
         </header>
-        <div className="Product-wrapper">
+        <div className="col-md-12">
           { this.props.data.shop.products.edges.map(product =>
             <Product addVariantToCart={this.addVariantToCart} checkout={this.state.checkout} key={product.node.id.toString()} product={product.node} />
           )}

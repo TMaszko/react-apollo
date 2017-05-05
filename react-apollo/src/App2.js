@@ -171,7 +171,7 @@ const query = gql`
     shop {
       name
       description
-      products(first:10) {
+      products(first:100) {
         pageInfo {
           hasNextPage
           hasPreviousPage

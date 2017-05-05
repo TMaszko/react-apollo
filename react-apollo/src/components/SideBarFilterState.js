@@ -6,11 +6,6 @@ export default class SideBarFilterState extends Component {
 		super(props)
 		this.state= {}
 	}
-
-	handleChangeFilter(item) {
-
-
-	}
 	render() {
 		const filters =[
 			{
@@ -20,11 +15,10 @@ export default class SideBarFilterState extends Component {
 				})
 			}
 		]
-		console.log(filters[0].options)
 		return (
 			<SideBarFiltersList
 				filters={filters}
-				onChangeFilter={this.handleChangeFilter.bind(this)}/>
+				onChangeFilter={this.props.handleFilterChange}/>
 			)
 	}
 }
