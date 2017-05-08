@@ -7,11 +7,23 @@ export default class SideBarFilterState extends Component {
 		this.state= {}
 	}
 	render() {
-		const filters =[
+		const filters = [
 			{
 				title: 'Product type:',
 				options: this.props.productsTypes.filter((item, pos) => {
 					return this.props.productsTypes.indexOf(item) === pos;
+				})
+			},
+			{
+				title: 'Vendor:',
+				options: this.props.productsVendors.filter((item, pos) => {
+					return this.props.productsVendors.indexOf(item) === pos;
+				})
+			},
+			{	
+				title: 'Tags',
+				options: this.props.productsTags.filter((item, pos) => {
+					return this.props.productsTags.indexOf(item) === pos;
 				})
 			}
 		]

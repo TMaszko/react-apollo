@@ -5,7 +5,7 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import '../../shared/app.css';
 
-const networkInterface = createNetworkInterface({ uri: 'https://namaste-marc-sandbox.myshopify.com//api/graphql' });
+const networkInterface = createNetworkInterface({ uri: 'https://namaste-marc-sandbox.myshopify.com/api/graphql' });
 
 networkInterface.use([{
   applyMiddleware(req, next) {
