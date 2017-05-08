@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-
+import { objectMap } from './helper'
 export default class  OptionCheckBoxes extends Component {
 	constructor(props) {
 		super(props)
@@ -16,14 +16,11 @@ export default class  OptionCheckBoxes extends Component {
 		const currentOption = {
 			value: e.target.value
 		}
-		const isChecked = this.state.checkedOptions[currentOption.value].checked;
-		const updatedState = { 
-								checkedOptions:{ 
-									...this.state.checkedOptions, 
-									[currentOption.value]: {checked: !isChecked}
-								}
-							}
-
+		let updatedState = {
+				checkedOptions: {}
+			}
+		objectMap(this.state.checkedOptions,
+		this.props.onChangeOptions(this.state.checkedOptions,currentOption.value), updatedState.checkedOptions);
 		this.setState(updatedState)
 		const checkedOptionsArray = Object.keys(updatedState.checkedOptions).filter(option => updatedState.checkedOptions[option].checked)
 		this.props.onChangeFilter(this.props.nameOfPropertyToCompareWith, checkedOptionsArray);	
