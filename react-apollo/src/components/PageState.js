@@ -4,15 +4,9 @@ import SideBarFilterState from './SideBarFilterState'
 import Pagination from 'react-js-pagination'
 
 
-const filteredProductsCardsView = (products, filters, startFilterTitle= "productType") => {
+const filteredProductsCardsView = (products, filters, changed) => {
 	return products.filter(product => {
-		let index = Object.keys(filters).indexOf(startFilterTitle);
-		console.log(index)
-		console.log('TAGS: ', product.node.tags)
-		console.log('Vendor',product.node.vendor)
-		let counter = 0;
 			for(let filterOption in filters) {
-				if(index <= counter) {
 					if(filters.hasOwnProperty(filterOption)) {
 						let passedFilters = 
 						filters[filterOption].values.length <= 0? true : 
@@ -22,18 +16,16 @@ const filteredProductsCardsView = (products, filters, startFilterTitle= "product
 															return valueOfFilter === valueInProduct
 														})
 													}
-														);
+											);
 						if(!passedFilters) {
 							return false;
-						}
-						counter++			
+						}		
 					}
 				}
 					
 			}
 			return true;
-		}
-	)
+		});
 }
 
 
