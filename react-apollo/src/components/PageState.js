@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductCard from './ProductCard'
-import SideBarFilterState from './SideBarFilterState'
+import { flatArray } from './helper'
+import SideBarFilter from './SideBarFilter'
 import Pagination from 'react-js-pagination'
 
 
@@ -8,24 +9,20 @@ const filteredProductsCardsView = (products, filters, changed) => {
 	return products.filter(product => {
 			for(let filterOption in filters) {
 					if(filters.hasOwnProperty(filterOption)) {
-						let passedFilters = 
-						filters[filterOption].values.length <= 0? true : 
-						filters[filterOption].values.some(valueOfFilter =>{
-						 return [product.node[filterOption]].reduce((acc,curr) => acc.concat(curr),[])
-														.some(valueInProduct => { 
-															return valueOfFilter === valueInProduct
-														})
-													}
-											);
+						let passedFilters = filters[filterOption].values.length <= 0?
+						true : 
+						filters[filterOption].values
+						.some(valueOfFilter => {
+							return flatArray([product.node[filterOption]])				//one option will be [1]
+								.some(valueInProduct => valueOfFilter === valueInProduct)
+						});
 						if(!passedFilters) {
 							return false;
-						}		
-					}
-				}
-					
-			}
+						}
+					}		
+				}			
 			return true;
-		});
+		})
 }
 
 
@@ -75,13 +72,14 @@ export default class PageState extends Component {
 						          			key={product.node.id.toString()} 
 						          			product={product.node}/> 
 				        				))
-		const productsTags = this.props.products.map(product => product.node.tags).reduce((acc,curr) => acc.concat(curr),[]);		        			
+				        				
+		const productsTags = flatArray(this.props.products.map(product => product.node.tags));		        			
   		const productsVendors=this.props.products.map(product => product.node.vendor)
         const productsTypes= this.props.products.map(product => product.node.productType);
   		return (
   			<div className="container col-md-12">
   				<div className="SideBarFilter col-md-3">
-	        		<SideBarFilterState handleFilterChange={this.handleFilterChange.bind(this)} productsTags={productsTags} productsVendors={productsVendors} productsTypes={productsTypes} />
+	        		<SideBarFilter handleFilterChange={this.handleFilterChange.bind(this)} tags={productsTags} vendors={productsVendors} productsTypes={productsTypes} />
 	        	</div>
 	  			<div className="Product-wrapper col-md-9">
 	          		{productsCardsView}

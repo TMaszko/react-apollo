@@ -1,11 +1,5 @@
 import React,{Component} from 'react'
 
-const toCamelCase =  (str) => str
-        .replace(/\s(.)/g, $1 => $1.toUpperCase())
-        .replace(/\s/g, '')
-        .replace(/^(.)/, $1 => $1.toLowerCase())
-        .replace(/:/g,'');
-
 export default class  OptionCheckBoxes extends Component {
 	constructor(props) {
 		super(props)
@@ -18,27 +12,32 @@ export default class  OptionCheckBoxes extends Component {
 	}
 
 	onChangeOption(e) {
+
 		const currentOption = {
 			value: e.target.value
 		}
 		const isChecked = this.state.checkedOptions[currentOption.value].checked;
-		const updatedState = { checkedOptions:{ ...this.state.checkedOptions, 
-								[currentOption.value]: {checked: !isChecked}}
+		const updatedState = { 
+								checkedOptions:{ 
+									...this.state.checkedOptions, 
+									[currentOption.value]: {checked: !isChecked}
+								}
 							}
-			this.setState(updatedState)
-		const title = toCamelCase(this.props.title);
+
+		this.setState(updatedState)
 		const checkedOptionsArray = Object.keys(updatedState.checkedOptions).filter(option => updatedState.checkedOptions[option].checked)
-		this.props.onChangeFilter(title, checkedOptionsArray);	
+		this.props.onChangeFilter(this.props.nameOfPropertyToCompareWith, checkedOptionsArray);	
 	}
 
 
 	render() {
+
 		return (
 		<div>
 			<h5>{this.props.title}</h5>
 		   		{this.props.listOfOptions.map((value) => 
-          		<label key={`label${this.props.title}-${value}`} className="col-md-12">
-		            <input type="checkbox" checked={this.state.checkedOptions[value].checked} onChange={this.onChangeOption.bind(this)} value={`${value}`} key={`checkbox${this.props.title}-${value}`}/>
+          		<label key={`label${this.props.nameOfPropertyToCompareWith}-${value}`} className="col-md-12">
+		            <input type="checkbox" checked={this.state.checkedOptions[value].checked} onChange={this.onChangeOption.bind(this)} value={`${value}`} key={`checkbox${this.props.nameOfPropertyToCompareWith}-${value}`}/>
 		                {value}
 	          	</label>
 	          	)}

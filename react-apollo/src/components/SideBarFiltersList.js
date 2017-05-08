@@ -6,9 +6,15 @@ import SideBarFilterItem from './SideBarFilterItem'
 const SideBarFiltersList = ({filters, onChangeFilter}) => {
 	return (
 		<ul>
-			{filters.map((filter,i) => {
-				return	<SideBarFilterItem onChangeFilter={onChangeFilter} key={`filterOf${filter.title}`} keyOfItem={`${filter.title}${i}`} title={filter.title} listOfOptions={filter.options} />
-			}
+			{filters.map((filter,i) => 
+				<SideBarFilterItem 
+					onChangeFilter={onChangeFilter} 
+					key={`filterOf${filter.nameOfPropertyToCompareWith}`}
+					keyOfItem={`${filter.nameOfPropertyToCompareWith}${i}`} 
+					nameOfPropertyToCompareWith={filter.nameOfPropertyToCompareWith}
+					title={filter.title}
+					listOfOptions={filter.options}
+					singleValue={filter.singleValue} />
 			)}
 		</ul>
 	)
